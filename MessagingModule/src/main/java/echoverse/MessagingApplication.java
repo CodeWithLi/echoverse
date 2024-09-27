@@ -1,4 +1,4 @@
-package echoverse.content;
+package echoverse;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -7,9 +7,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@MapperScan("echoverse.content.mapper")
-public class ContentApplication {
+@MapperScan("echoverse.messaging.mapper")
+public class MessagingApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ContentApplication.class,args);
+        SpringApplication.run(MessagingApplication.class,args);
     }
 }

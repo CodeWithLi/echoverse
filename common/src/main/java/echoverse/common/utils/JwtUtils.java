@@ -3,6 +3,7 @@ package echoverse.common.utils;
 
 import echoverse.common.exception.BaseException;
 import echoverse.common.properties.JwtProperties;
+import echoverse.model.dto.Jwt.JwtClaims;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -25,24 +26,22 @@ public class JwtUtils {
     private JwtProperties jwtProperties;
 
     //todo 后期更改成项目所需的
-    public String createUserIdJwt(String userId, String loginType, List<String> authorities){
+    public String createUserIdJwt(String userId, List<String> authorities){
         Map<String, Object> claims=new HashMap<>();
 
         // 设置User对象的属性到claims中
         claims.put("userId", userId);
-        claims.put("loginType", loginType);
         claims.put("authorities", authorities);
 
         return createJwt(jwtProperties.getOrSecretKey(), jwtProperties.getOrTtl(), claims);
     }
 
-//    public JwtClaims getUserIdJwt(String token){
-//        Claims claims = praseJwt(jwtProperties.getOrSecretKey(), token);
-//        String userId=(String) claims.get("userId");
-//        String loginType= (String) claims.get("loginType");
-//        List<String> authorities= (List<String>) claims.get("authorities");
-//        return new JwtClaims(userId,loginType,authorities);
-//    }
+    public JwtClaims getUserIdJwt(String token){
+        Claims claims = praseJwt(jwtProperties.getOrSecretKey(), token);
+        String userId=(String) claims.get("userId");
+        List<String> authorities= (List<String>) claims.get("authorities");
+        return new JwtClaims(userId,authorities);
+    }
     /**
      * @param secretKey 密钥
      * @param ttlMillis 过期时间

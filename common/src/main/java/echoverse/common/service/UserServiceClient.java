@@ -17,8 +17,8 @@ public interface UserServiceClient {
     String test();
 
     //根据邮箱登录
-    @GetMapping("/user/getUserByEmail")
-    User getUserByEmail(@RequestParam("email") String email);
+    @GetMapping("/user/getUserByPhone")
+    User getUserByPhone(@RequestParam("phone") String phone);
 
     //根据用户id查询用户权限
     @GetMapping("/user/authorities")

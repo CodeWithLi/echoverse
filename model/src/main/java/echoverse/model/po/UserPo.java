@@ -1,5 +1,6 @@
 package echoverse.model.po;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,46 +15,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class UserPo implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * 用户id
-     */
     private String userId;
 
-    /**
-     * 用户姓名
-     */
-    private String username;
-
-    /**
-     * 用户手机号
-     */
     private String phone;
 
-    /**
-     * 用户邮箱
-     */
-    private String email;
-
-    /**
-     * 用户密码
-     */
     private String password;
 
-    /**
-     * 用户注册时间
-     */
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime createTime;
 
-    /**
-     * 用户账号状态，0为未封禁，1以封禁
-     */
     private Integer status;
 
-    /**
-     * 用户注销状态，0为未注销，1以注销
-     */
     private Integer isDelete;
 
 

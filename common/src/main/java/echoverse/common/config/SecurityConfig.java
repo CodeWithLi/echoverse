@@ -61,7 +61,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))//禁用session，因为我们已经使用了JWT
                 .httpBasic(AbstractHttpConfigurer::disable)//禁用httpBasic，因为我们传输数据用的是post，而且请求体是JSON
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .requestMatchers("/user/test1").permitAll() //登录放行
+                        .requestMatchers("/user/login","/user/register","/sms/sendSms","/sms/getSms","/user/getUserByPhone","/user/authorities").permitAll() //登录放行
                         .anyRequest().authenticated())//其余均要身份认证
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);//将用户授权时用到的JWT校验过滤器添加进SecurityFilterChain中，并放在UsernamePasswordAuthenticationFilter的前面
                 //.exceptionHandling(ExceptionHandling -> ExceptionHandling.authenticationEntryPoint(authenticationEntryPoint).accessDeniedHandler(accessDeniedHandler));

@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="echoverse.user.mapper.UserMapper">
+
+<!--    //判断用户是否存在-->
+    <select id="isExitUser" resultType="int">
+        select count(*) from user where phone = #{phone} and status = 0 and is_delete = 0
+    </select>
+
+<!--    //添加用户-->
+    <insert id="insertUser">
+        insert into user(user_id,phone,password,create_time,status,is_delete)
+        values(#{userId},#{phone},#{password},#{createTime},#{status},#{isDelete})
+    </insert>
+
+
+<!--    //添加用户到用户权限表-->
+    <insert id="insertRoleUser">
+        insert into user_role(role_id,user_id)
+        values (#{roleId},#{userId})
+    </insert>
+
 <!--    UserPo getUserByEmail(String email);-->
-    <select id="getUserByEmail" resultType="echoverse.model.po.UserPo">
-        select * from echouser where email=#{email} and status=0 and is_delete=0
+    <select id="getUserByPhone" resultType="echoverse.model.po.UserPo">
+        select * from user where phone=#{phone} and status=0 and is_delete=0
     </select>
 </mapper>
